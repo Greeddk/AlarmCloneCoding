@@ -6,8 +6,7 @@
 //
 import SwiftUI
 
-struct Alarm: Hashable, Codable, Identifiable {
-    
+struct Alarm: Identifiable {
     let id: UUID
     var date: Date
     var label: String
@@ -15,13 +14,13 @@ struct Alarm: Hashable, Codable, Identifiable {
     var isActive: Bool
     var isSnooze: Bool
     
-    var repeats: String{
-        guard repeatDay.count > 0 else {return "" }
+    var repeats: String {
+        guard repeatDay.count > 0 else { return "" }
         return repeatDay.repeats
     }
     
-    init(id: UUID, date: Date, label: String, repeatDay: [RepeatDay], isActive: Bool, isSnooze: Bool) {
-        self.id = UUID()
+    init(id: UUID = UUID(), date: Date, label: String, repeatDay: [RepeatDay], isActive: Bool, isSnooze: Bool) {
+        self.id = id
         self.date = date
         self.label = label
         self.repeatDay = repeatDay.map { $0.rawValue }
@@ -29,14 +28,13 @@ struct Alarm: Hashable, Codable, Identifiable {
         self.isSnooze = isSnooze
     }
     
-    static var defaultAlarm: [Alarm] {
-        get {
-            [
-                Alarm(id: UUID(), date: Date().addingTimeInterval(-1000), label: "Alarm", repeatDay: [.sunday], isActive: true, isSnooze: true)
-            
-            ]
-        }
-    }
+//    static var defaultAlarm: [Alarm] {
+//        [
+//            Alarm(id: UUID(), date: Date().addingTimeInterval(-1000), label: "Alarm", repeatDay: [.sunday], isActive: true, isSnooze: true)
+//        ]
+//    }
 }
 
-
+extension Alarm {
+    static var arr: [Alarm] = []
+}

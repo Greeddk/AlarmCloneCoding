@@ -16,7 +16,7 @@ struct AlarmRepeatView: View {
            AlarmRepeatCellView(repeatDay: self.$repeatDay, index: .constant(index), isContained: self.isContained(index))
          }
        }.listStyle(.grouped)
-       .navigationBarTitle(Text("Repeat"), displayMode: .inline)
+       .navigationBarTitle(Text("반복"), displayMode: .inline)
      }
      
      private func isContained(_ index: Int) -> Bool {

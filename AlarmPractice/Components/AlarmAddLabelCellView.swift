@@ -17,8 +17,10 @@ struct AlarmAddLabelCellView : View {
           TextField("알람", text: $label)
               .fixedSize()
               .frame(alignment: .trailing)
+          //.multilineTextAlignment(.trailing)
               .onAppear {
                   UITextField.appearance().clearButtonMode = .whileEditing
+                  //
               }
       }
   }

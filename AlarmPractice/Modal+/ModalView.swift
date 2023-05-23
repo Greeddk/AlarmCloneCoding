@@ -14,7 +14,7 @@ struct ModalView: View {
     @State var isSnoozed: Bool = true
     @State var label: String = "알람"
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var alarmData: AlarmData
+    @EnvironmentObject var alarmData: AlarmData
     
     var body: some View {
         NavigationView {
@@ -27,9 +27,11 @@ struct ModalView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
-                        Button("저장") {
+                        Button {
                             self.createAlarm()
-                            
+                        } label: {
+                            Text("저장")
+                                .bold()
                         }
                     }
                     ToolbarItem(placement: .cancellationAction) {
@@ -45,7 +47,7 @@ struct ModalView: View {
                     AlarmAddSnoozeCellView(isSnoozed: $isSnoozed)
                 }
                 .listStyle(.grouped)
-                
+                .scrollDisabled(true) 
             }
         }
         
