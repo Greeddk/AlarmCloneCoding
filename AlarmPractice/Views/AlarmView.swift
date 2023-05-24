@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AlarmView : View {
     @ObservedObject var alarmData: AlarmData
+//    @State private var isEditing: Bool
     let alarm: Alarm
     
     var alarmIndex: Int? {
@@ -29,6 +30,8 @@ struct AlarmView : View {
     }()
     
     var body: some View {
+        
+        
         if let index = alarmIndex {
           Toggle(isOn: $alarmData.alarms[index].isActive) {
             // 뷰 내용

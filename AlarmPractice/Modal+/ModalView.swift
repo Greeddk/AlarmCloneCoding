@@ -46,7 +46,7 @@ struct ModalView: View {
                     AlarmAddSoundCellView()
                     AlarmAddSnoozeCellView(isSnoozed: $isSnoozed)
                 }
-                .listStyle(.grouped)
+                .listStyle(.insetGrouped)
                 .scrollDisabled(true) 
             }
         }

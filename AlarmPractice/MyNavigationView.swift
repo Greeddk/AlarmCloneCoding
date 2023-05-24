@@ -36,15 +36,21 @@ struct MyNavigationView: View {
                     .font(.body)
                     
                     Section(header: Text("기타").fontWeight(.bold)) {
+//                        ForEach(alarmData.alarms.indices, id: \.self) { index in
+//                            AlarmView(alarmData: self.alarmData, alarm: alarmData.alarms[index])
+//                        }
                         ForEach(alarmData.alarms.indices, id: \.self) { index in
-                            AlarmView(alarmData: self.alarmData, alarm: alarmData.alarms[index])
+                                // 수정 페이지로 이동하는 버튼을 추가합니다.
+                            NavigationLink(destination: EditModalView(alarmIndex: index)) {
+                                    AlarmView(alarmData: self.alarmData, alarm: alarmData.alarms[index])
+                                }
                         }
                         .onDelete { indexSet in
                             indexSet.forEach { index in
                                 alarmData.remove(at: index)
                             }
                         }
-                    }
+                    }//section
                 }
                 .foregroundColor(Color.white)
                 .font(.body)
@@ -53,14 +59,14 @@ struct MyNavigationView: View {
                     Button("삭제", role: .destructive, action: {
                     } )
                 }
-                .tint(Color.red)
+//                .tint(Color.red)
             }//list
             //                .scrollContentBackground(.hidden)
             .listStyle(.plain)
             // iOS16부터 아래 명령어를 써야지 백 컬러 설정가능
             .navigationBarTitle("알람" ,displayMode: .automatic)
             //아래가 없으면 스프링 효과가 없음
-//            .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(.spring())
+            .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(.spring())
             //editbutton custom
             .navigationBarItems(leading:  Button(action: {
                 withAnimation{
@@ -82,7 +88,8 @@ struct MyNavigationView: View {
                 }
             )
         }
-    }//NavigationView
+        //NavigationView
+    }
 }
 
 
