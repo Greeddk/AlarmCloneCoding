@@ -9,9 +9,10 @@ import SwiftUI
 
 struct AlarmView: View {
     @EnvironmentObject var alarmData: AlarmData
-    @State private var isEditing = false
-//    @Environment(\.editMode) var editMode
+//    @State var isEditing = false
+    @Environment(\.editMode) var editMode
     @State private var showModal = false
+    @State private var editShowModal = false
     
     //    init() {
     //            let coloredAppearance = UINavigationBarAppearance()
@@ -25,9 +26,6 @@ struct AlarmView: View {
     var body: some View {
         NavigationView{
             ZStack {
-                //                Color.black
-                //                    .edgesIgnoringSafeArea(.all)
-                
                 List{
                     Section(header: listHeaderView() ){
                         listTextView()
@@ -38,8 +36,16 @@ struct AlarmView: View {
                     Section {
                         ForEach(alarmData.alarms.indices, id: \.self) { index in
                             // 수정 페이지로 이동하는 버튼을 추가합니다.
-                            NavigationLink(destination: EditModalView(alarmIndex: index)) {
+                            //                            NavigationLink(destination: EditModalView(alarmIndex: index)) {
+                            //                                AlarmCardView(alarmData: self.alarmData, alarm: alarmData.alarms[index])
+                            //                            }
+                            Button {
+                                editShowModal.toggle()
+                            } label: {
                                 AlarmCardView(alarmData: self.alarmData, alarm: alarmData.alarms[index])
+                            }
+                            .sheet(isPresented: self.$editShowModal) {
+                                EditModalView(alarmIndex: index)
                             }
                         }
                         .onDelete { indexSet in
@@ -60,24 +66,16 @@ struct AlarmView: View {
                     Button("삭제", role: .destructive, action: {
                     } )
                 }
-//                .tint(Color.red)
-            }//list
+                //                .tint(Color.red)
+            }//Zstack
             //                .scrollContentBackground(.hidden)
             .listStyle(.plain)
             // iOS16부터 아래 명령어를 써야지 백 컬러 설정가능
             .navigationBarTitle("알람" ,displayMode: .automatic)
             //아래가 없으면 스프링 효과가 없음
-//            .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(.spring())
+            //            .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(.spring())
             //editbutton custom
-            .navigationBarItems(leading: EditButton()
-//                                    Button(action: {
-//                withAnimation{
-//                    self.isEditing.toggle()
-//                }
-//            }) {
-//                Text(isEditing ? "완료" : "편집")
-//            }
-            )
+            .navigationBarItems(leading: EditButton())
             .foregroundColor(Color.orange)
             .navigationBarItems(trailing: Button(action: {
                 self.showModal = true
@@ -134,6 +132,7 @@ struct listTextView: View {
         }
     }
 }
+
 
 struct AlarmView_Previews: PreviewProvider {
     static var previews: some View {

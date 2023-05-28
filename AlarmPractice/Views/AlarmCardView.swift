@@ -10,7 +10,8 @@ import SwiftUI
 
 struct AlarmCardView : View {
     @ObservedObject var alarmData: AlarmData
-//    @State private var isEditing: Bool
+    @Environment(\.editMode) var editMode
+//    var isEditing: Bool
     let alarm: Alarm
     
     var alarmIndex: Int? {
@@ -31,30 +32,56 @@ struct AlarmCardView : View {
     
     var body: some View {
         if let index = alarmIndex {
-          Toggle(isOn: $alarmData.alarms[index].isActive) {
-            // 뷰 내용
-              VStack(alignment: .leading, spacing: 0) {
-                  HStack(alignment: .firstTextBaseline, spacing: -2.0){
-                      Text("\(self.alarm.date, formatter: self.meridiemFormat)")
-                          .font(.system(size: 30))
-                      
-                      Text("\(self.alarm.date, formatter: self.timeFormat)")
-                          .font(.system(size: 50))
-                          .fontWeight(.light)
-                  }
-                  
-                  HStack(spacing: 0) {
-                      Text(self.alarm.label)
-                          .font(.subheadline)
-                      
-                      if self.alarm.repeats != "" {
-                          Text(", \(self.alarm.repeats)")
-                              .font(.subheadline)
-                      }
-                  }
-              }
-          }//toggle
-          .tint(Color.green)
+            if editMode?.wrappedValue.isEditing == true {
+                       // Editing 모드일 때의 뷰
+                       NavigationLink(destination: EditModalView(alarmIndex: alarmIndex!)) {
+                           VStack(alignment: .leading, spacing: 0) {
+                               HStack(alignment: .firstTextBaseline, spacing: -2.0){
+                                   Text("\(self.alarm.date, formatter: self.meridiemFormat)")
+                                       .font(.system(size: 30))
+                                   
+                                   Text("\(self.alarm.date, formatter: self.timeFormat)")
+                                       .font(.system(size: 50))
+                                       .fontWeight(.light)
+                               }
+                               
+                               HStack(spacing: 0) {
+                                   Text(self.alarm.label)
+                                       .font(.subheadline)
+                                   
+                                   if self.alarm.repeats != "" {
+                                       Text(", \(self.alarm.repeats)")
+                                           .font(.subheadline)
+                                   }
+                               }
+                           }
+                       }
+                   } else {
+                       // 일반 모드일 때의 뷰
+                       Toggle(isOn: $alarmData.alarms[index].isActive) {
+                           VStack(alignment: .leading, spacing: 0) {
+                               HStack(alignment: .firstTextBaseline, spacing: -2.0){
+                                   Text("\(self.alarm.date, formatter: self.meridiemFormat)")
+                                       .font(.system(size: 30))
+                                   
+                                   Text("\(self.alarm.date, formatter: self.timeFormat)")
+                                       .font(.system(size: 50))
+                                       .fontWeight(.light)
+                               }
+                               
+                               HStack(spacing: 0) {
+                                   Text(self.alarm.label)
+                                       .font(.subheadline)
+                                   
+                                   if self.alarm.repeats != "" {
+                                       Text(", \(self.alarm.repeats)")
+                                           .font(.subheadline)
+                                   }
+                               }
+                           }
+                       }
+                       .tint(Color.green)
+                   }
         } else {
           Text("알람을 찾을 수 없음")
         }
