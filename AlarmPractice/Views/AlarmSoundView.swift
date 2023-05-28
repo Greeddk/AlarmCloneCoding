@@ -33,6 +33,7 @@ struct AlarmSoundView: View {
                 Text("sound7")
                 Text("sound8")
             }
+            .listStyle(.insetGrouped)
         }
         
     }

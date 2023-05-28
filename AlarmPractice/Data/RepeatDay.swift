@@ -44,7 +44,7 @@ enum RepeatDay: Int {
 
 extension Array where Element == Int {
   var repeats: String {
-    let sorted = self.sorted()
+      let sorted = self.sorted()
     if sorted == [0, 6] { return "주말" }
     if sorted == [1 ,2, 3, 4, 5] { return "주중" }
     if sorted == [0, 1, 2, 3, 4, 5, 6] { return "매일" }

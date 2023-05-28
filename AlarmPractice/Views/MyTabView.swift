@@ -22,7 +22,7 @@ struct MyTabView: View {
                         Text("세계 시계")
                     }
                     .tag(0)
-                MyNavigationView()
+                AlarmView()
                     .environmentObject(alarmData) // 공통의 AlarmData 객체 주입
                     .tabItem{
                         Image(systemName: "alarm.fill")

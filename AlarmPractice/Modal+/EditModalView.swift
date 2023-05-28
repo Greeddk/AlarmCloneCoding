@@ -13,6 +13,7 @@ struct EditModalView: View {
     @State var repeatDay: [RepeatDay] = []
     @State var isSnoozed: Bool = true
     @State var label: String = "알람"
+    @State var isActive: Bool = true
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var globalAlarmData: AlarmData
 
@@ -26,11 +27,11 @@ struct EditModalView: View {
     var body: some View {
         NavigationView {
             VStack{
-                DatePicker("Please enter a date", selection: $date,
+                DatePicker("", selection: $date,
                            displayedComponents: .hourAndMinute)
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
-                .navigationTitle("알람 추가")
+                .navigationTitle("알람 편집")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
@@ -71,6 +72,11 @@ struct EditModalView: View {
                 .listStyle(.insetGrouped)
                 .scrollDisabled(true)
             }
+            .onAppear {
+                date = globalAlarmData.alarms[alarmIndex].date;
+                repeatDay = globalAlarmData.alarms[alarmIndex].repeatDay.map { RepeatDay(rawValue: $0)! };
+                label = globalAlarmData.alarms[alarmIndex].label
+            }
         }
         .navigationBarBackButtonHidden(true)
     }//body
@@ -80,7 +86,7 @@ struct EditModalView: View {
                    id: alarm.id,
                    date: date,
                    label: label,
-                   repeatDay: repeatDay,
+                   repeatDay: repeatDay.map { RepeatDay(rawValue: $0.rawValue)! },
                    isActive: true,
                    isSnooze: isSnoozed
                )
