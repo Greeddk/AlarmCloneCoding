@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		424473262A10D18700F4CF7A /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473252A10D18700F4CF7A /* Alarm.swift */; };
 		424473282A126E1100F4CF7A /* RepeatDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473272A126E1100F4CF7A /* RepeatDay.swift */; };
 		4244732B2A12747B00F4CF7A /* AlarmRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244732A2A12747B00F4CF7A /* AlarmRepeatView.swift */; };
 		4244732E2A12750C00F4CF7A /* AlarmAddRepeatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244732D2A12750C00F4CF7A /* AlarmAddRepeatCellView.swift */; };
@@ -16,7 +15,6 @@
 		424473372A127B5700F4CF7A /* AlarmAddSnoozeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473362A127B5700F4CF7A /* AlarmAddSnoozeCellView.swift */; };
 		424473392A127BF400F4CF7A /* AlarmAddSoundCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473382A127BF400F4CF7A /* AlarmAddSoundCellView.swift */; };
 		4244733B2A127C3000F4CF7A /* AlarmSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244733A2A127C3000F4CF7A /* AlarmSoundView.swift */; };
-		4244733D2A12869800F4CF7A /* AlarmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244733C2A12869800F4CF7A /* AlarmData.swift */; };
 		4244733F2A128A2100F4CF7A /* AlarmCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244733E2A128A2100F4CF7A /* AlarmCardView.swift */; };
 		424473442A1B6F1000F4CF7A /* StopWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473432A1B6F1000F4CF7A /* StopWatchView.swift */; };
 		424473462A1CB2A300F4CF7A /* EditModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473452A1CB2A300F4CF7A /* EditModalView.swift */; };
@@ -34,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		424473252A10D18700F4CF7A /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		424473272A126E1100F4CF7A /* RepeatDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatDay.swift; sourceTree = "<group>"; };
 		4244732A2A12747B00F4CF7A /* AlarmRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepeatView.swift; sourceTree = "<group>"; };
 		4244732D2A12750C00F4CF7A /* AlarmAddRepeatCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAddRepeatCellView.swift; sourceTree = "<group>"; };
@@ -43,7 +40,6 @@
 		424473362A127B5700F4CF7A /* AlarmAddSnoozeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAddSnoozeCellView.swift; sourceTree = "<group>"; };
 		424473382A127BF400F4CF7A /* AlarmAddSoundCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmAddSoundCellView.swift; sourceTree = "<group>"; };
 		4244733A2A127C3000F4CF7A /* AlarmSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSoundView.swift; sourceTree = "<group>"; };
-		4244733C2A12869800F4CF7A /* AlarmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmData.swift; sourceTree = "<group>"; };
 		4244733E2A128A2100F4CF7A /* AlarmCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCardView.swift; sourceTree = "<group>"; };
 		424473432A1B6F1000F4CF7A /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; };
 		424473452A1CB2A300F4CF7A /* EditModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModalView.swift; sourceTree = "<group>"; };
@@ -84,6 +80,9 @@
 		4244732C2A1274F400F4CF7A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4244732F2A12770200F4CF7A /* AlarmRepeatCellView.swift */,
+				4244733A2A127C3000F4CF7A /* AlarmSoundView.swift */,
+				4244732A2A12747B00F4CF7A /* AlarmRepeatView.swift */,
 				4244732D2A12750C00F4CF7A /* AlarmAddRepeatCellView.swift */,
 				424473322A12783400F4CF7A /* AlarmAddLabelCellView.swift */,
 				424473362A127B5700F4CF7A /* AlarmAddSnoozeCellView.swift */,
@@ -98,9 +97,6 @@
 				426AEA422A0A75420045D3DE /* MyView.swift */,
 				426AEA402A0A6CFD0045D3DE /* MyTabView.swift */,
 				426AEA362A0935BD0045D3DE /* AlarmView.swift */,
-				4244732F2A12770200F4CF7A /* AlarmRepeatCellView.swift */,
-				4244733A2A127C3000F4CF7A /* AlarmSoundView.swift */,
-				4244732A2A12747B00F4CF7A /* AlarmRepeatView.swift */,
 				4244733E2A128A2100F4CF7A /* AlarmCardView.swift */,
 				4244732C2A1274F400F4CF7A /* Components */,
 			);
@@ -147,8 +143,6 @@
 			children = (
 				426AEA282A091BD90045D3DE /* AlarmPracticeApp.swift */,
 				426AEA2A2A091BD90045D3DE /* ContentView.swift */,
-				424473252A10D18700F4CF7A /* Alarm.swift */,
-				4244733C2A12869800F4CF7A /* AlarmData.swift */,
 				424473542A234E4E00F4CF7A /* Data */,
 				424473312A12780100F4CF7A /* Views */,
 				424473292A12745900F4CF7A /* Modal+ */,
@@ -241,7 +235,6 @@
 			files = (
 				424473462A1CB2A300F4CF7A /* EditModalView.swift in Sources */,
 				426AEA622A0CD84D0045D3DE /* ModalView.swift in Sources */,
-				4244733D2A12869800F4CF7A /* AlarmData.swift in Sources */,
 				4244732E2A12750C00F4CF7A /* AlarmAddRepeatCellView.swift in Sources */,
 				424473282A126E1100F4CF7A /* RepeatDay.swift in Sources */,
 				424473372A127B5700F4CF7A /* AlarmAddSnoozeCellView.swift in Sources */,
@@ -257,7 +250,6 @@
 				424473332A12783400F4CF7A /* AlarmAddLabelCellView.swift in Sources */,
 				424473492A23405200F4CF7A /* AlarmDataModel.xcdatamodeld in Sources */,
 				426AEA412A0A6CFD0045D3DE /* MyTabView.swift in Sources */,
-				424473262A10D18700F4CF7A /* Alarm.swift in Sources */,
 				4244732B2A12747B00F4CF7A /* AlarmRepeatView.swift in Sources */,
 				426AEA372A0935BD0045D3DE /* AlarmView.swift in Sources */,
 			);

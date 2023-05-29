@@ -54,7 +54,6 @@ extension Array where Element == Int {
       guard let day = RepeatDay(rawValue: i)?.shortName else { return returnedDay }
       returnedDay += "\(day) "
     }
-    
     return returnedDay
   }
 }

@@ -5,18 +5,16 @@
 //  Created by Greed on 2023/05/16.
 //
 
-
 import SwiftUI
+import CoreData
 
 struct AlarmCardView : View {
-    @ObservedObject var alarmData: AlarmData
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.editMode) var editMode
-//    var isEditing: Bool
-    let alarm: Alarm
-    
-    var alarmIndex: Int? {
-        alarmData.alarms.firstIndex(where: { $0.id == alarm.id })
-    }
+    @FetchRequest(
+        entity: Alarm.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Alarm.date, ascending: true)]) var alarms: FetchedResults<Alarm>
+    var alarm: FetchedResults<Alarm>.Element
+    @State var isOn: Bool = false
     
     let timeFormat: DateFormatter = {
         let formatter = DateFormatter()
@@ -31,50 +29,49 @@ struct AlarmCardView : View {
     }()
     
     var body: some View {
-        if let index = alarmIndex {
             if editMode?.wrappedValue.isEditing == true {
                        // Editing 모드일 때의 뷰
-                       NavigationLink(destination: EditModalView(alarmIndex: alarmIndex!)) {
+//                       NavigationLink(destination: EditModalView(alarmIndex: alarmIndex!)) {
                            VStack(alignment: .leading, spacing: 0) {
                                HStack(alignment: .firstTextBaseline, spacing: -2.0){
-                                   Text("\(self.alarm.date, formatter: self.meridiemFormat)")
+                                   Text("\(alarm.date!, formatter: self.meridiemFormat)")
                                        .font(.system(size: 30))
                                    
-                                   Text("\(self.alarm.date, formatter: self.timeFormat)")
+                                   Text("\(alarm.date!, formatter: self.timeFormat)")
                                        .font(.system(size: 50))
                                        .fontWeight(.light)
                                }
                                
                                HStack(spacing: 0) {
-                                   Text(self.alarm.label)
+                                   Text(alarm.label!)
                                        .font(.subheadline)
                                    
-                                   if self.alarm.repeats != "" {
-                                       Text(", \(self.alarm.repeats)")
+                                   if alarm.repeatDay?.repeats != "" {
+                                       Text(", \(alarm.repeatDay!.repeats)")
                                            .font(.subheadline)
                                    }
                                }
                            }
-                       }
+//                       }
                    } else {
                        // 일반 모드일 때의 뷰
-                       Toggle(isOn: $alarmData.alarms[index].isActive) {
+                       Toggle(isOn: $isOn ) {
                            VStack(alignment: .leading, spacing: 0) {
                                HStack(alignment: .firstTextBaseline, spacing: -2.0){
-                                   Text("\(self.alarm.date, formatter: self.meridiemFormat)")
+                                   Text("\(alarm.date!, formatter: self.meridiemFormat)")
                                        .font(.system(size: 30))
                                    
-                                   Text("\(self.alarm.date, formatter: self.timeFormat)")
+                                   Text("\(alarm.date!, formatter: self.timeFormat)")
                                        .font(.system(size: 50))
                                        .fontWeight(.light)
                                }
                                
                                HStack(spacing: 0) {
-                                   Text(self.alarm.label)
+                                   Text(alarm.label!)
                                        .font(.subheadline)
                                    
-                                   if self.alarm.repeats != "" {
-                                       Text(", \(self.alarm.repeats)")
+                                   if alarm.repeatDay?.repeats != "" {
+                                       Text(", \(alarm.repeatDay!.repeats)")
                                            .font(.subheadline)
                                    }
                                }
@@ -82,10 +79,6 @@ struct AlarmCardView : View {
                        }
                        .tint(Color.green)
                    }
-        } else {
-          Text("알람을 찾을 수 없음")
-        }
-
     }
 }
 

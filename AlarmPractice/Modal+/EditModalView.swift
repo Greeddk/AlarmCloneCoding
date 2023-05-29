@@ -15,14 +15,15 @@ struct EditModalView: View {
     @State var label: String = "알람"
     @State var isActive: Bool = true
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var globalAlarmData: AlarmData
+    @Environment(\.managedObjectContext) var managedObjectContext
+    var alarm: FetchedResults<Alarm>.Element? = nil
 
 //    var alarmData: AlarmData
-    var alarmIndex: Int
-    
-    private var alarm: Alarm {
-        globalAlarmData.alarms[alarmIndex]
-        }
+//    var alarmIndex: Int
+//
+//    private var alarm: Alarm {
+//        globalAlarmData.alarms[alarmIndex]
+//        }
     
     var body: some View {
         NavigationView {
@@ -36,7 +37,7 @@ struct EditModalView: View {
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
-                            updateAlarm()
+                            updateAlarmListener()
                             self.dismiss()
                         } label: {
                             Text("저장")
@@ -58,7 +59,7 @@ struct EditModalView: View {
                     }
                     Section{
                         Button {
-                            removeAlarm()
+                            deleteAlarmListener()
                         } label: {
                             HStack {
                                 Spacer()
@@ -73,28 +74,21 @@ struct EditModalView: View {
                 .scrollDisabled(true)
             }
             .onAppear {
-                date = globalAlarmData.alarms[alarmIndex].date;
-                repeatDay = globalAlarmData.alarms[alarmIndex].repeatDay.map { RepeatDay(rawValue: $0)! };
-                label = globalAlarmData.alarms[alarmIndex].label
+//                date = globalAlarmData.alarms[alarmIndex].date;
+//                repeatDay = globalAlarmData.alarms[alarmIndex].repeatDay.map { RepeatDay(rawValue: $0)! };
+//                label = globalAlarmData.alarms[alarmIndex].label
             }
         }
         .navigationBarBackButtonHidden(true)
     }//body
     
-    private func updateAlarm() {
-               let editedAlarm = Alarm(
-                   id: alarm.id,
-                   date: date,
-                   label: label,
-                   repeatDay: repeatDay.map { RepeatDay(rawValue: $0.rawValue)! },
-                   isActive: true,
-                   isSnooze: isSnoozed
-               )
-               globalAlarmData.alarms[alarmIndex] = editedAlarm // 수정된 부분
-           }
+    func updateAlarmListener() {
+        DataController.shared.updateAlarm(alarm: alarm!, date: date, label: label, repeatDay: repeatDay, isActive: isActive, isSnoozed: isSnoozed, context: managedObjectContext)
+        dismiss()
+    }
     
-    private func removeAlarm() {
-        globalAlarmData.remove(at: alarmIndex)
+    func deleteAlarmListener() {
+        DataController.shared.removeAlarm(alarm: alarm!, context: managedObjectContext)
         dismiss()
     }
 }

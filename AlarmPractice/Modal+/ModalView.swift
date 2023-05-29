@@ -13,8 +13,11 @@ struct ModalView: View {
     @State var repeatDay: [RepeatDay] = []
     @State var isSnoozed: Bool = true
     @State var label: String = "알람"
+    @State var isActive: Bool = true
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var alarmData: AlarmData
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    var alarm: FetchedResults<Alarm>.Element? = nil
     
     var body: some View {
         NavigationView {
@@ -28,7 +31,7 @@ struct ModalView: View {
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
-                            self.createAlarm()
+                            newAlarmListener()
                         } label: {
                             Text("저장")
                                 .bold()
@@ -53,19 +56,8 @@ struct ModalView: View {
         
     }//body
     
-    private func createAlarm() {
-        let newAlarm = Alarm(
-            id: UUID(),
-            date: date,
-            label: label,
-            repeatDay: repeatDay,
-            isActive: true,
-            isSnooze: isSnoozed
-        )
-        
-        self.alarmData.alarms.append(newAlarm)
-        //정렬
-        self.alarmData.alarms = self.alarmData.alarms.sorted(by: {$0.date < $1.date})
+    func newAlarmListener() {
+        DataController.shared.createAlarm(date: date, label: label, repeatDay: repeatDay, isActive: isActive, isSnoozed: isSnoozed, context: managedObjectContext)
         dismiss()
     }
 }

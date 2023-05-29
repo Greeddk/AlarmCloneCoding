@@ -8,20 +8,12 @@
 import SwiftUI
 
 struct AlarmView: View {
-    @EnvironmentObject var alarmData: AlarmData
-//    @State var isEditing = false
     @Environment(\.editMode) var editMode
     @State private var showModal = false
     @State private var editShowModal = false
-    
-    //    init() {
-    //            let coloredAppearance = UINavigationBarAppearance()
-    //
-    //                // for automatic and large displayMode
-    ////        coloredAppearance.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor.darkText]
-    //                // to make everything work normally
-    //                UINavigationBar.appearance().standardAppearance = coloredAppearance
-    //        }
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+        entity: Alarm.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Alarm.date, ascending: true)]) var alarms: FetchedResults<Alarm>
     
     var body: some View {
         NavigationView{
@@ -34,15 +26,11 @@ struct AlarmView: View {
                     .font(.body)
                     
                     Section {
-                        ForEach(alarmData.alarms.indices, id: \.self) { index in
-                            // 수정 페이지로 이동하는 버튼을 추가합니다.
-                            //                            NavigationLink(destination: EditModalView(alarmIndex: index)) {
-                            //                                AlarmCardView(alarmData: self.alarmData, alarm: alarmData.alarms[index])
-                            //                            }
+                        ForEach(alarms) { index in
                             Button {
                                 editShowModal.toggle()
                             } label: {
-                                AlarmCardView(alarmData: self.alarmData, alarm: alarmData.alarms[index])
+                                AlarmCardView()
                             }
                             .sheet(isPresented: self.$editShowModal) {
                                 EditModalView(alarmIndex: index)
@@ -50,11 +38,11 @@ struct AlarmView: View {
                         }
                         .onDelete { indexSet in
                             indexSet.forEach { index in
-                                alarmData.remove(at: index)
+                                alarms.remove(at: index)
                             }
                         }
                     } header: {
-                        if !alarmData.alarms.isEmpty {
+                        if !alarms.isEmpty {
                             Text("기타").fontWeight(.bold)
                         }
                     }
@@ -135,10 +123,9 @@ struct listTextView: View {
 
 
 struct AlarmView_Previews: PreviewProvider {
+    let dataController = DataController.shared
     static var previews: some View {
-        let alarmData = AlarmData() // 새로운 AlarmData 인스턴스 생성
-        
-        return AlarmView()
-            .environmentObject(alarmData)
+        AlarmView()
+            .environment(\.managedObjectContext, dataController.container.viewContext)
     }
 }
