@@ -15,7 +15,7 @@ class DataController: ObservableObject {
     let container: NSPersistentContainer
     
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Alarm")
+        container = NSPersistentContainer(name: "AlarmDataModel")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -35,7 +35,7 @@ class DataController: ObservableObject {
         }
     }//saveContext
     
-    func createAlarm(date: Date, label: String, repeatDay: [RepeatDay], isActive: Bool, isSnoozed: Bool, context: NSManagedObjectContext) {
+    func createAlarm(date: Date, label: String, repeatDay: [Int], isActive: Bool, isSnoozed: Bool, context: NSManagedObjectContext) {
         let newAlarm = Alarm(context: context)
         newAlarm.id = UUID()
         newAlarm.date = date
@@ -47,7 +47,7 @@ class DataController: ObservableObject {
         saveContext(context: context)
     }
     
-    func updateAlarm(alarm: Alarm, date: Date, label: String, repeatDay: [RepeatDay], isActive: Bool, isSnoozed: Bool, context: NSManagedObjectContext) {
+    func updateAlarm(alarm: Alarm, date: Date, label: String, repeatDay: [Int], isActive: Bool, isSnoozed: Bool, context: NSManagedObjectContext) {
         alarm.date = date
         alarm.label = label
         alarm.repeatDay = repeatDay

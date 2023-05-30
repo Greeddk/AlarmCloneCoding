@@ -6,6 +6,6 @@
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isSnoozed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="label" optional="YES" attributeType="String"/>
-        <attribute name="repeatDay" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[RepeatDay]"/>
+        <attribute name="repeatDay" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
     </entity>
 </model>

@@ -57,7 +57,8 @@ struct ModalView: View {
     }//body
     
     func newAlarmListener() {
-        DataController.shared.createAlarm(date: date, label: label, repeatDay: repeatDay, isActive: isActive, isSnoozed: isSnoozed, context: managedObjectContext)
+        let repeatArr = repeatDay.map {$0.rawValue}
+        DataController.shared.createAlarm(date: date, label: label, repeatDay: repeatArr, isActive: isActive, isSnoozed: isSnoozed, context: managedObjectContext)
         dismiss()
     }
 }

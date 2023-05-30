@@ -30,19 +30,19 @@ struct AlarmView: View {
                             Button {
                                 editShowModal.toggle()
                             } label: {
-                                AlarmCardView()
+                                AlarmCardView(alarm: index)
                             }
                             .sheet(isPresented: self.$editShowModal) {
-                                EditModalView(alarmIndex: index)
+                                EditModalView(alarm: index)
                             }
                         }
-                        .onDelete { indexSet in
-                            indexSet.forEach { index in
-                                alarms.remove(at: index)
-                            }
-                        }
+                        //                        .onDelete { indexSet in
+                        //                            indexSet.forEach { index in
+                        //                                alarms.remove(at: index)
+                        //                            }
+                        //                        }
                     } header: {
-                        if !alarms.isEmpty {
+                        if alarms.count == 0 {
                             Text("기타").fontWeight(.bold)
                         }
                     }
@@ -126,6 +126,5 @@ struct AlarmView_Previews: PreviewProvider {
     let dataController = DataController.shared
     static var previews: some View {
         AlarmView()
-            .environment(\.managedObjectContext, dataController.container.viewContext)
     }
 }

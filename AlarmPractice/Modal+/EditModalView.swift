@@ -83,7 +83,8 @@ struct EditModalView: View {
     }//body
     
     func updateAlarmListener() {
-        DataController.shared.updateAlarm(alarm: alarm!, date: date, label: label, repeatDay: repeatDay, isActive: isActive, isSnoozed: isSnoozed, context: managedObjectContext)
+        let repeatArr = repeatDay.map {$0.rawValue}
+        DataController.shared.updateAlarm(alarm: alarm!, date: date, label: label, repeatDay: repeatArr, isActive: isActive, isSnoozed: isSnoozed, context: managedObjectContext)
         dismiss()
     }
     
