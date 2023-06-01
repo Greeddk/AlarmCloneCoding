@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct AlarmPracticeApp: App {
+    let dataController = DataController.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MyTabView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }
