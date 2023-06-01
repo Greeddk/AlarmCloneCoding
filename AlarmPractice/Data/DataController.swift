@@ -62,6 +62,11 @@ class DataController: ObservableObject {
         saveContext(context: context)
     }
     
-    
+    func deleteAlarmIndex(alarms: FetchedResults<Alarm> ,offsets: IndexSet, context: NSManagedObjectContext) {
+            withAnimation {
+                offsets.map { alarms[$0] }.forEach(context.delete)
+                saveContext(context: context)
+            }
+        }
 }
 
