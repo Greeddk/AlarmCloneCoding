@@ -17,13 +17,13 @@ struct EditModalView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var managedObjectContext
     var alarm: FetchedResults<Alarm>.Element? = nil
-
-//    var alarmData: AlarmData
-//    var alarmIndex: Int
-//
-//    private var alarm: Alarm {
-//        globalAlarmData.alarms[alarmIndex]
-//        }
+    
+    //    var alarmData: AlarmData
+    //    var alarmIndex: Int
+    //
+    //    private var alarm: Alarm {
+    //        globalAlarmData.alarms[alarmIndex]
+    //        }
     
     var body: some View {
         NavigationView {
@@ -38,16 +38,17 @@ struct EditModalView: View {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
                             updateAlarmListener()
-                            self.dismiss()
                         } label: {
                             Text("저장")
                                 .bold()
+                                .foregroundColor(.orange)
                         }
                     }
                     ToolbarItem(placement: .cancellationAction) {
                         Button("취소", role: .cancel) {
                             self.dismiss()
                         }
+                        .foregroundColor(.orange)
                     }
                 }//toolbar
                 List {
@@ -73,10 +74,15 @@ struct EditModalView: View {
                 .listStyle(.insetGrouped)
                 .scrollDisabled(true)
             }
-            .onAppear {
-//                date = globalAlarmData.alarms[alarmIndex].date;
-//                repeatDay = globalAlarmData.alarms[alarmIndex].repeatDay.map { RepeatDay(rawValue: $0)! };
-//                label = globalAlarmData.alarms[alarmIndex].label
+            .onAppear() {
+                let enumValues = alarm?.repeatDay?.compactMap { RepeatDay( rawValue: $0 ) }
+                if let alarm = alarm {
+                    date = alarm.date!
+                    repeatDay = enumValues!
+                    label = alarm.label!
+                    isActive = alarm.isActive
+                    isSnoozed = alarm.isSnoozed
+                }
             }
         }
         .navigationBarBackButtonHidden(true)

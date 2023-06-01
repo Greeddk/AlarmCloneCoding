@@ -29,56 +29,69 @@ struct AlarmCardView : View {
     }()
     
     var body: some View {
+        if let date = alarm.date {
+            
             if editMode?.wrappedValue.isEditing == true {
-                       // Editing 모드일 때의 뷰
-//                       NavigationLink(destination: EditModalView(alarmIndex: alarmIndex!)) {
-                           VStack(alignment: .leading, spacing: 0) {
-                               HStack(alignment: .firstTextBaseline, spacing: -2.0){
-                                   Text("\(alarm.date!, formatter: self.meridiemFormat)")
-                                       .font(.system(size: 30))
-                                   
-                                   Text("\(alarm.date!, formatter: self.timeFormat)")
-                                       .font(.system(size: 50))
-                                       .fontWeight(.light)
-                               }
-                               
-                               HStack(spacing: 0) {
-                                   Text(alarm.label!)
-                                       .font(.subheadline)
-                                   
-                                   if alarm.repeatDay?.repeats != "" {
-                                       Text(", \(alarm.repeatDay!.repeats)")
-                                           .font(.subheadline)
-                                   }
-                               }
-                           }
-//                       }
-                   } else {
-                       // 일반 모드일 때의 뷰
-                       Toggle(isOn: $isOn ) {
-                           VStack(alignment: .leading, spacing: 0) {
-                               HStack(alignment: .firstTextBaseline, spacing: -2.0){
-                                   Text("\(alarm.date!, formatter: self.meridiemFormat)")
-                                       .font(.system(size: 30))
-                                   
-                                   Text("\(alarm.date!, formatter: self.timeFormat)")
-                                       .font(.system(size: 50))
-                                       .fontWeight(.light)
-                               }
-                               
-                               HStack(spacing: 0) {
-                                   Text(alarm.label!)
-                                       .font(.subheadline)
-                                   
-                                   if alarm.repeatDay?.repeats != "" {
-                                       Text(", \(alarm.repeatDay!.repeats)")
-                                           .font(.subheadline)
-                                   }
-                               }
-                           }
-                       }
-                       .tint(Color.green)
-                   }
+                // Editing 모드일 때의 뷰
+                //                       NavigationLink(destination: EditModalView(alarmIndex: alarmIndex!)) {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(alignment: .firstTextBaseline, spacing: -2.0){
+                        Text("\(date, formatter: self.meridiemFormat)")
+                            .font(.system(size: 30))
+                        
+                        Text("\(date, formatter: self.timeFormat)")
+                            .font(.system(size: 50))
+                            .fontWeight(.light)
+                    }
+                    
+                    HStack(spacing: 0) {
+                        Text(alarm.label!)
+                            .font(.subheadline)
+                        
+                        if alarm.repeatDay?.repeats != "" {
+                            Text(", \(alarm.repeatDay!.repeats)")
+                                .font(.subheadline)
+                        }
+                    }
+                }
+                //                       }
+            } else {
+                // 일반 모드일 때의 뷰
+                Toggle(isOn: $isOn ) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        HStack(alignment: .firstTextBaseline, spacing: -2.0){
+                            Text("\(date, formatter: self.meridiemFormat)")
+                                .font(.system(size: 30))
+                            
+                            Text("\(date, formatter: self.timeFormat)")
+                                .font(.system(size: 50))
+                                .fontWeight(.light)
+                        }
+                        
+                        HStack(spacing: 0) {
+                            Text(alarm.label!)
+                                .font(.subheadline)
+                            
+                            if alarm.repeatDay?.repeats != "" {
+                                Text(", \(alarm.repeatDay!.repeats)")
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                }
+                .onAppear() {
+                    isOn = alarm.isSnoozed
+                }
+                .onChange(of: alarm.isSnoozed) { newValue in
+                    isOn = newValue
+                    alarm.isSnoozed = isOn
+                }
+//                .onChange(of: isOn) { newValue in
+//                    alarm.isSnoozed = isOn
+//                                }
+                .tint(Color.green)
+            }
+        }
     }
 }
 

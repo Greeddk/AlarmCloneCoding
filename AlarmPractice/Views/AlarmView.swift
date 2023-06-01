@@ -12,8 +12,7 @@ struct AlarmView: View {
     @State private var showModal = false
     @State private var editShowModal = false
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(
-        entity: Alarm.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Alarm.date, ascending: true)]) var alarms: FetchedResults<Alarm>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Alarm.date, ascending: true)]) var alarms: FetchedResults<Alarm>
     
     var body: some View {
         NavigationView{
@@ -36,25 +35,17 @@ struct AlarmView: View {
                                 EditModalView(alarm: index)
                             }
                         }
-                        //                        .onDelete { indexSet in
-                        //                            indexSet.forEach { index in
-                        //                                alarms.remove(at: index)
-                        //                            }
-                        //                        }
+                        .onDelete {indexSet in
+                            DataController.shared.deleteAlarmIndex(alarms: alarms, offsets: indexSet, context: managedObjectContext)
+                        }
                     } header: {
-                        if alarms.count == 0 {
+                        if alarms.count > 0 {
                             Text("기타").fontWeight(.bold)
                         }
                     }
                 }
                 .foregroundColor(Color.white)
                 .font(.body)
-                .tint(.red)
-                .swipeActions {
-                    Button("삭제", role: .destructive, action: {
-                    } )
-                }
-                //                .tint(Color.red)
             }//Zstack
             //                .scrollContentBackground(.hidden)
             .listStyle(.plain)
