@@ -16,7 +16,7 @@ struct MyTabView: View {
 //                .edgesIgnoringSafeArea(.all)
             
             TabView {
-                MyView(title: "세계 시계")
+                WorldTime()
                     .tabItem{
                         Image(systemName: "globe")
                         Text("세계 시계")

@@ -23,16 +23,12 @@ struct AlarmView: View {
                     }
                     .foregroundColor(Color.primary)
                     .font(.body)
-                    
                     Section {
                         ForEach(alarms) { index in
                             Button {
                                 editShowModal.toggle()
                             } label: {
                                 AlarmCardView(alarm: index)
-                            }
-                            .sheet(isPresented: self.$editShowModal) {
-                                EditModalView(alarm: index)
                             }
                         }
                         .onDelete {indexSet in
@@ -44,6 +40,9 @@ struct AlarmView: View {
                         }
                     }
                 }
+                .sheet(isPresented: self.$editShowModal) {
+                        EditModalView()
+                    }
                 .foregroundColor(Color.white)
                 .font(.body)
             }//Zstack

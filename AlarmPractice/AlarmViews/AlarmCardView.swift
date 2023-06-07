@@ -33,28 +33,28 @@ struct AlarmCardView : View {
             
             if editMode?.wrappedValue.isEditing == true {
                 // Editing 모드일 때의 뷰
-                //                       NavigationLink(destination: EditModalView(alarmIndex: alarmIndex!)) {
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(alignment: .firstTextBaseline, spacing: -2.0){
-                        Text("\(date, formatter: self.meridiemFormat)")
-                            .font(.system(size: 30))
+                NavigationLink(destination: EditModalView(alarm: alarm)) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        HStack(alignment: .firstTextBaseline, spacing: -2.0){
+                            Text("\(date, formatter: self.meridiemFormat)")
+                                .font(.system(size: 30))
+                            
+                            Text("\(date, formatter: self.timeFormat)")
+                                .font(.system(size: 50))
+                                .fontWeight(.light)
+                        }
                         
-                        Text("\(date, formatter: self.timeFormat)")
-                            .font(.system(size: 50))
-                            .fontWeight(.light)
-                    }
-                    
-                    HStack(spacing: 0) {
-                        Text(alarm.label!)
-                            .font(.subheadline)
-                        
-                        if alarm.repeatDay?.repeats != "" {
-                            Text(", \(alarm.repeatDay!.repeats)")
+                        HStack(spacing: 0) {
+                            Text(alarm.label!)
                                 .font(.subheadline)
+                            
+                            if alarm.repeatDay?.repeats != "" {
+                                Text(", \(alarm.repeatDay!.repeats)")
+                                    .font(.subheadline)
+                            }
                         }
                     }
                 }
-                //                       }
             } else {
                 // 일반 모드일 때의 뷰
                 Toggle(isOn: $isOn ) {
@@ -86,9 +86,6 @@ struct AlarmCardView : View {
                     isOn = newValue
                     alarm.isSnoozed = isOn
                 }
-//                .onChange(of: isOn) { newValue in
-//                    alarm.isSnoozed = isOn
-//                                }
                 .tint(Color.green)
             }
         }

@@ -17,13 +17,7 @@ struct EditModalView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var managedObjectContext
     var alarm: FetchedResults<Alarm>.Element? = nil
-    
-    //    var alarmData: AlarmData
-    //    var alarmIndex: Int
-    //
-    //    private var alarm: Alarm {
-    //        globalAlarmData.alarms[alarmIndex]
-    //        }
+    @State var isFirst: Bool = true
     
     var body: some View {
         NavigationView {
@@ -75,13 +69,16 @@ struct EditModalView: View {
                 .scrollDisabled(true)
             }
             .onAppear() {
-                let enumValues = alarm?.repeatDay?.compactMap { RepeatDay( rawValue: $0 ) }
                 if let alarm = alarm {
                     date = alarm.date!
-                    repeatDay = enumValues!
                     label = alarm.label!
                     isActive = alarm.isActive
                     isSnoozed = alarm.isSnoozed
+                    if isFirst {
+                        let enumValues = alarm.repeatDay?.compactMap { RepeatDay( rawValue: $0 ) }
+                        repeatDay = enumValues!
+                        self.isFirst = false
+                    }
                 }
             }
         }
