@@ -19,13 +19,6 @@ struct EditModalView: View {
     var alarm: FetchedResults<Alarm>.Element? = nil
     @State var isFirst: Bool = true
     
-    //    var alarmData: AlarmData
-    //    var alarmIndex: Int
-    //
-    //    private var alarm: Alarm {
-    //        globalAlarmData.alarms[alarmIndex]
-    //        }
-    
     var body: some View {
         NavigationView {
             VStack{
