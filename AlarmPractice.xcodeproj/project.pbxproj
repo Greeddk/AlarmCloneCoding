@@ -21,6 +21,12 @@
 		424473492A23405200F4CF7A /* AlarmDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 424473472A23405200F4CF7A /* AlarmDataModel.xcdatamodeld */; };
 		424473532A234B9800F4CF7A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473522A234B9700F4CF7A /* DataController.swift */; };
 		424473572A23711600F4CF7A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 424473592A23711600F4CF7A /* Localizable.strings */; };
+		424473602A2C71DB00F4CF7A /* WorldTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244735F2A2C71DB00F4CF7A /* WorldTime.swift */; };
+		424473632A2C730100F4CF7A /* SelectCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473622A2C730100F4CF7A /* SelectCity.swift */; };
+		424473652A2C736D00F4CF7A /* WorldTimeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473642A2C736D00F4CF7A /* WorldTimeCardView.swift */; };
+		424473682A2F8E7100F4CF7A /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473672A2F8E7100F4CF7A /* TimerView.swift */; };
+		4244736A2A30419A00F4CF7A /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424473692A30419A00F4CF7A /* SearchBar.swift */; };
+		4244736C2A304BB600F4CF7A /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4244736B2A304BB600F4CF7A /* CityData.swift */; };
 		426AEA292A091BD90045D3DE /* AlarmPracticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426AEA282A091BD90045D3DE /* AlarmPracticeApp.swift */; };
 		426AEA2B2A091BD90045D3DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426AEA2A2A091BD90045D3DE /* ContentView.swift */; };
 		426AEA2D2A091BDA0045D3DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 426AEA2C2A091BDA0045D3DE /* Assets.xcassets */; };
@@ -46,6 +52,12 @@
 		424473482A23405200F4CF7A /* AlarmDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AlarmDataModel.xcdatamodel; sourceTree = "<group>"; };
 		424473522A234B9700F4CF7A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		424473582A23711600F4CF7A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4244735F2A2C71DB00F4CF7A /* WorldTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTime.swift; sourceTree = "<group>"; };
+		424473622A2C730100F4CF7A /* SelectCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCity.swift; sourceTree = "<group>"; };
+		424473642A2C736D00F4CF7A /* WorldTimeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeCardView.swift; sourceTree = "<group>"; };
+		424473672A2F8E7100F4CF7A /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		424473692A30419A00F4CF7A /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		4244736B2A304BB600F4CF7A /* CityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityData.swift; sourceTree = "<group>"; };
 		426AEA252A091BD90045D3DE /* AlarmPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		426AEA282A091BD90045D3DE /* AlarmPracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPracticeApp.swift; sourceTree = "<group>"; };
 		426AEA2A2A091BD90045D3DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,16 +103,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		424473312A12780100F4CF7A /* Views */ = {
+		424473312A12780100F4CF7A /* AlarmViews */ = {
 			isa = PBXGroup;
 			children = (
-				426AEA422A0A75420045D3DE /* MyView.swift */,
-				426AEA402A0A6CFD0045D3DE /* MyTabView.swift */,
+				4244732C2A1274F400F4CF7A /* Components */,
+				424473292A12745900F4CF7A /* Modal+ */,
 				426AEA362A0935BD0045D3DE /* AlarmView.swift */,
 				4244733E2A128A2100F4CF7A /* AlarmCardView.swift */,
-				4244732C2A1274F400F4CF7A /* Components */,
 			);
-			path = Views;
+			path = AlarmViews;
 			sourceTree = "<group>";
 		};
 		424473422A1B6EEB00F4CF7A /* StopWatch */ = {
@@ -117,8 +128,36 @@
 				424473272A126E1100F4CF7A /* RepeatDay.swift */,
 				424473522A234B9700F4CF7A /* DataController.swift */,
 				424473472A23405200F4CF7A /* AlarmDataModel.xcdatamodeld */,
+				4244736B2A304BB600F4CF7A /* CityData.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		4244735E2A2C713B00F4CF7A /* WorldTimeView */ = {
+			isa = PBXGroup;
+			children = (
+				4244735F2A2C71DB00F4CF7A /* WorldTime.swift */,
+				424473642A2C736D00F4CF7A /* WorldTimeCardView.swift */,
+				424473612A2C72E700F4CF7A /* Modal */,
+			);
+			path = WorldTimeView;
+			sourceTree = "<group>";
+		};
+		424473612A2C72E700F4CF7A /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				424473622A2C730100F4CF7A /* SelectCity.swift */,
+				424473692A30419A00F4CF7A /* SearchBar.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		424473662A2F8E4800F4CF7A /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				424473672A2F8E7100F4CF7A /* TimerView.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 		426AEA1C2A091BD90045D3DE = {
@@ -143,11 +182,14 @@
 			children = (
 				426AEA282A091BD90045D3DE /* AlarmPracticeApp.swift */,
 				426AEA2A2A091BD90045D3DE /* ContentView.swift */,
+				426AEA402A0A6CFD0045D3DE /* MyTabView.swift */,
+				426AEA422A0A75420045D3DE /* MyView.swift */,
 				424473542A234E4E00F4CF7A /* Data */,
-				424473312A12780100F4CF7A /* Views */,
-				424473292A12745900F4CF7A /* Modal+ */,
+				424473312A12780100F4CF7A /* AlarmViews */,
 				426AEA2C2A091BDA0045D3DE /* Assets.xcassets */,
+				4244735E2A2C713B00F4CF7A /* WorldTimeView */,
 				424473422A1B6EEB00F4CF7A /* StopWatch */,
+				424473662A2F8E4800F4CF7A /* Timer */,
 				426AEA2E2A091BDA0045D3DE /* Preview Content */,
 			);
 			path = AlarmPractice;
@@ -238,10 +280,15 @@
 				4244732E2A12750C00F4CF7A /* AlarmAddRepeatCellView.swift in Sources */,
 				424473282A126E1100F4CF7A /* RepeatDay.swift in Sources */,
 				424473372A127B5700F4CF7A /* AlarmAddSnoozeCellView.swift in Sources */,
+				4244736A2A30419A00F4CF7A /* SearchBar.swift in Sources */,
+				4244736C2A304BB600F4CF7A /* CityData.swift in Sources */,
+				424473602A2C71DB00F4CF7A /* WorldTime.swift in Sources */,
 				426AEA2B2A091BD90045D3DE /* ContentView.swift in Sources */,
 				424473532A234B9800F4CF7A /* DataController.swift in Sources */,
 				426AEA292A091BD90045D3DE /* AlarmPracticeApp.swift in Sources */,
 				4244733F2A128A2100F4CF7A /* AlarmCardView.swift in Sources */,
+				424473652A2C736D00F4CF7A /* WorldTimeCardView.swift in Sources */,
+				424473682A2F8E7100F4CF7A /* TimerView.swift in Sources */,
 				424473392A127BF400F4CF7A /* AlarmAddSoundCellView.swift in Sources */,
 				4244733B2A127C3000F4CF7A /* AlarmSoundView.swift in Sources */,
 				424473302A12770200F4CF7A /* AlarmRepeatCellView.swift in Sources */,
@@ -251,6 +298,7 @@
 				424473492A23405200F4CF7A /* AlarmDataModel.xcdatamodeld in Sources */,
 				426AEA412A0A6CFD0045D3DE /* MyTabView.swift in Sources */,
 				4244732B2A12747B00F4CF7A /* AlarmRepeatView.swift in Sources */,
+				424473632A2C730100F4CF7A /* SelectCity.swift in Sources */,
 				426AEA372A0935BD0045D3DE /* AlarmView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
